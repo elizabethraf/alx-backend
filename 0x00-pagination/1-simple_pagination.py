@@ -2,7 +2,15 @@
 """Define get_page that takes two integer arguments"""
 import csv
 import math
-from typing import List
+from typing import List, Tuple
+
+
+def index_range(page, page_size):
+    """Return a tuple of size two containing a start index"""
+    start_index = (page - 1) * page_size
+    end_index = start_index + page_size
+
+    return (start_index, end_index)
 
 
 class Server:
@@ -25,23 +33,15 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-            pass
-    assert isinstance(page, int) and page > 0, "Page should be an integer greater than 0."
+        """Define method named get_page that takes two integer arguments"""
+        assert type(page) == int
+        assert type(page_size) == int
+        assert page > 0
+        assert page_size > 0
+        csv_size = len(self.dataset())
+        start, end = index_range(page, page_size)
+        end = min(end, csv_size)
+        if start >= csv_size:
+            return []
 
-    assert isinstance(page_size, int) and page_size > 0, "Page should be an integer greater than 0."
-
-    with open('data.csv', newline='') as csvfile:
-        reader = csv.reader(csvfile, delimiter=',', quotechar='"')
-        data = list(reader)
-
-    start_index, end_index = index_range(page, page_size)
-    if start_index >= len(data):
-        return []
-
-    return data[start_index:end_index]
-
-    def index_range(page, page_size):
-    start_index = (page - 1) * page_size
-    end_index = start_index + page_size
-
-    return (start_index, end_index)
+        return self.dataset()[start:end]
