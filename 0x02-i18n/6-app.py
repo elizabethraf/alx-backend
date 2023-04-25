@@ -29,6 +29,18 @@ def get_user(login_as):
     g.user = get_user(request.args.get("login_as"))
 
 
+@app.before_request
+def before_request():
+    """Display request"""
+    g.user = get_user(request.args.get("login_as"))
+
+
+@app.route('/', methods=['GET'], strict_slashes=False)
+def helloWorld() -> str:
+    """Display hello world"""
+    return render_template('6-index.html')
+
+
 @babel.localeselector
 def get_locale():
     """Display local host"""
