@@ -22,9 +22,3 @@ app.config.from_object(Config)
 def get_index():
     """Display Hellow world"""
     return render_template('1-index.html')
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
-
