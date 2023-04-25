@@ -19,6 +19,6 @@ app.config.from_object(Config)
 
 
 @babel.localeselector
-def get_index():
-    """Display Hellow world"""
-    return render_template('1-index.html')
+def get_locale():
+    """Display Hello world"""
+    return return request.accept_languages.best_match(app.config['LANGUAGES'])
