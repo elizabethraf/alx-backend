@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Display get_locale function with the babel.localeselector"""
+import babel
 from flask import Flask, render_template, request
 from flask_babel import Babel, gettext
 
